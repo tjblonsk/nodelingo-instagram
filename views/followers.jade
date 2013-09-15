@@ -1,0 +1,17 @@
+extends layout
+block content
+  h1 Followers
+  each follower in followers
+    -f (follower.profile_picture)
+      div.photo
+        a(href='/follow/#{follower.id}')
+          img(src='#{follower.profile_picture}',
+          title='#{follower.username}')
+
+  h1 Follows
+  each follow in follows
+    -if (follow.profile_picture)
+      div.photo
+        a(href='/follow/#{follow.id}')
+          img(src='#{follow.profile_picture}', title='#{follow.username}')
+
