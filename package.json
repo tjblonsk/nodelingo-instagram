@@ -13,5 +13,9 @@
     "connect-mongo": "~0.3.3",
     "socket.io": "~0.9.16",
     "insta-stream": "~0.1.0"
+  },
+  "subdomain": "timmys09-nodelingo-instagram",
+  "engines": {
+    "node": "0.10.x"
   }
 }

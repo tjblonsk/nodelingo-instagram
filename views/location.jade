@@ -1,18 +1,20 @@
 extends layout
 
 block content
-  h1 Location : #{lat}, #{lng}
+  h1 Location: #{lat}, #{lng}
   #media
     each media in medias
       img(src='#{media.images.low_resolution.url}')
 
-
   script
-    var socket = io.connect('#{host}/#{user.id}');
+    var medias = io.connect('#{host}/#{user.id}')
+    function strdecode( data ) {
+      return JSON.parse( decodeURIComponent( escape ( data ) ) );
+    }
+    medias.on('data', function(data) {
 
-    socket.on('data', function(data){
-      data.forEach(function(media){
-        $('#media').prepend('<img src="' + media.images.low_resolution.url + '" />')
-      })
-      console.log(data);
-    })
+      data = strdecode(data);
+      data.forEach(function(media) {
+        $('#media').prepend('<img src="' + media.images.low_resolution.url + '" />');
+      });
+    });
